@@ -28,7 +28,7 @@ jobs:
       # PDF
       - run: asciidoctor-pdf -o build/index.pdf docs/index.adoc
 
-      # Copiar recursos estáticos
+      # Copiar recursos estáticos (imagenes)
       - name: Copy static assets
         run: |
           if [ -d docs/images ]; then
