@@ -1220,7 +1220,95 @@ Los pasos para valorar cada amenaza son los siguientes:
 - El nivel de riesgo se determina tras evaluar los factores anteriores, considerando cuántos bajos, medios o altos hay en cada uno.
 
 En nuestro ejemplo, se tiene la siguiente valoración de amenazas:
-//TODO: Incluir tabla de amenazas con valoración de riesgo (Alta, Media, Baja)
+
+[cols="2,2,2,2,4,1", options="header"]
+|===
+|Elemento del DFD |Riesgo |Categoría STRIDE |Amenaza |Descripción |Prioridad
+
+|Heal REST API (Proceso)
+|Indisponibilidad del servicio
+|Denial of Service
+|Saturación del API
+|Un atacante podría enviar un alto volumen de solicitudes simultáneas al API REST, provocando la indisponibilidad del sistema para usuarios legítimos.
+|Alta
+
+|Login / Autenticación (Proceso)
+|Acceso no autorizado
+|Spoofing
+|Suplantación de identidad
+|Un atacante podría autenticarse utilizando credenciales robadas o mediante ataques de fuerza bruta, obteniendo acceso no autorizado al sistema.
+|Alta
+
+|Login / Autenticación (Proceso)
+|Escalada de privilegios
+|Elevation of Privilege
+|Uso indebido de tokens
+|Una gestión insegura de tokens podría permitir reutilizar o manipular tokens para acceder a funciones no autorizadas.
+|Alta
+
+|Gestión de Pacientes (Proceso)
+|Modificación indebida de datos
+|Tampering
+|Manipulación de información de pacientes
+|Un usuario con permisos insuficientes podría modificar o eliminar registros de pacientes explotando fallas de validación.
+|Alta
+
+|Gestión de Historial Clínico (Proceso)
+|Divulgación de información sensible
+|Information Disclosure
+|Exposición de historiales clínicos
+|Fallas en el control de acceso podrían permitir consultar información médica sensible sin autorización.
+|Alta
+
+|Gestión de Historial Clínico (Proceso)
+|Pérdida de trazabilidad
+|Repudiation
+|Negación de modificaciones
+|Un usuario podría negar haber modificado información clínica si no existen mecanismos de auditoría adecuados.
+|Media
+
+|Gestión de Consultas Médicas (Proceso)
+|Alteración de información clínica
+|Tampering
+|Manipulación de consultas médicas
+|Un atacante podría modificar o eliminar consultas sin autorización, afectando la integridad clínica.
+|Alta
+
+|Gestión de Citas (Proceso)
+|Alteración de agenda médica
+|Tampering
+|Manipulación de citas
+|Un atacante podría modificar fechas, estados o médicos asignados a citas médicas.
+|Media
+
+|Gestión de Empleados (Proceso)
+|Acceso administrativo indebido
+|Elevation of Privilege
+|Escalada de privilegios
+|Un usuario podría obtener privilegios administrativos por validaciones incorrectas de rol.
+|Alta
+
+|Flujo de datos HTTP(S)
+|Intercepción de información
+|Information Disclosure
+|Exposición de datos en tránsito
+|Las solicitudes y respuestas podrían ser interceptadas si no se usa cifrado TLS adecuado.
+|Alta
+
+|Base de Datos Clínica (Data Store)
+|Acceso no autorizado a la información
+|Elevation of Privilege
+|Ejecución de SQL no autorizado
+|Un atacante podría ejecutar consultas con privilegios elevados sobre la base de datos.
+|Alta
+
+|Trust Boundary Usuario–API
+|Inyección de datos maliciosos
+|Tampering
+|Manipulación de datos en frontera de confianza
+|Payloads maliciosos podrían cruzar la frontera de confianza si no se validan adecuadamente.
+|Alta
+|===
 
 
 ===== Paso 3 — Determinar contramedidas y mitigación
@@ -1251,13 +1339,110 @@ Una vez que se han identificado las amenazas y las contramedidas correspondiente
 
 Siguiendo con el ejemplo, se tiene la siguiente tabla de contramedidas para las amenazas identificadas:
 
-//TODO: Ahora sí se podrían incluir las contramedidas en la tabla del Paso 2. 
+[cols="2,2,2,2,4,1", options="header"]
+|===
+|Elemento |Riesgo |Categoría |Amenaza |Mitigaciones |Prioridad
 
-Una vez que se han identificado y documentado todo lo anterior, se procede a crear el modelo de amenazas con una herramienta especializada. En nuestro caso, se usará OWASP Threat Dragon.
+|Heal REST API (Proceso)
+|Indisponibilidad del servicio
+|Denial of Service
+|Saturación del API
+|Se implementa rate limiting a nivel sistema mediante Nginx como proxy inverso, limitando el número de peticiones por intervalo de tiempo. Se monitorea el tráfico para detectar comportamientos anómalos. +
+Parcial: existe rate limiting en Nginx, pero no hay protección DDoS avanzada.
+|Alta
 
-//TODO: Uso de OWASP Threat Dragon para crear el modelo de amenazas del caso de estudio. Y mostrar capturas de pantalla de la herramienta.
+|Login / Autenticación (Proceso)
+|Acceso no autorizado
+|Spoofing
+|Suplantación de identidad
+|Se emplea hasheo de contraseñas. Se aplican políticas de contraseñas (8–15 caracteres, letras, números y símbolos). La autenticación se realiza mediante tokens. +
+Parcial: hay hashing y tokens, pero no MFA ni bloqueo por intentos fallidos.
+|Alta
 
-//TODO: Incluir enlace al modelo de amenazas creado en OWASP Threat Dragon.
+|Login / Autenticación (Proceso)
+|Escalada de privilegios
+|Elevation of Privilege
+|Uso indebido de tokens
+|Se utiliza autenticación basada en tokens. Los tokens se validan en cada solicitud protegida y se transmiten únicamente sobre HTTPS. +
+Parcial: se validan tokens y se usa HTTPS, pero sin rotación ni revocación avanzada.
+|Alta
+
+|Gestión de Pacientes (Proceso)
+|Modificación indebida de datos
+|Tampering
+|Manipulación de información de pacientes
+|Se valida el acceso mediante roles por ruta (RBAC). Se validan parámetros de entrada usando express-validator. +
+Total: control de roles y validación de entradas evitan modificaciones no autorizadas.
+|Alta
+
+|Gestión de Historial Clínico (Proceso)
+|Divulgación de información sensible
+|Information Disclosure
+|Exposición de historiales clínicos
+|Se restringe el acceso a rutas sensibles por roles. Se utiliza HTTPS para proteger la información en tránsito. +
+Parcial: hay roles y HTTPS, pero no cifrado en almacenamiento.
+|Alta
+
+|Gestión de Historial Clínico (Proceso)
+|Pérdida de trazabilidad
+|Repudiation
+|Negación de modificaciones
+|Se registra cada evento relevante en una bitácora del sistema, permitiendo auditoría de operaciones sobre datos clínicos. +
+Parcial: existe bitácora, pero sin firmas digitales ni sellado criptográfico.
+|Media
+
+|Gestión de Consultas Médicas (Proceso)
+|Alteración de información clínica
+|Tampering
+|Manipulación de consultas médicas
+|Se controla el acceso por rol a las rutas. Se validan los datos de entrada con express-validator antes de procesarlos. +
+Total: roles y validación de datos cubren adecuadamente la amenaza.
+|Alta
+
+|Gestión de Citas (Proceso)
+|Alteración de agenda médica
+|Tampering
+|Manipulación de citas
+|Se limita el acceso a las operaciones de modificación mediante validación de roles y se registran eventos en bitácora. +
+Parcial: control por roles y bitácora, sin integridad histórica.
+|Media
+
+|Gestión de Empleados (Proceso)
+|Acceso administrativo indebido
+|Elevation of Privilege
+|Escalada de privilegios
+|Se aplican validaciones de rol para permitir únicamente a administradores el acceso a rutas de gestión de empleados. +
+Total: separación clara de roles administrativos.
+|Alta
+
+|Flujo de datos HTTP(S)
+|Intercepción de información
+|Information Disclosure
+|Exposición de datos en tránsito
+|Se utiliza HTTPS con certificado autofirmado para cifrar las comunicaciones entre clientes y la API. +
+Parcial: HTTPS con certificado autofirmado, no CA confiable.
+|Alta
+
+|Base de Datos Clínica (Data Store)
+|Acceso no autorizado
+|Elevation of Privilege
+|Ejecución de SQL no autorizado
+|Se restringen las operaciones a través de la API y no se permite acceso directo a la base de datos desde clientes externos. +
+Parcial: acceso solo vía API, sin cifrado en reposo ni auditoría avanzada.
+|Alta
+
+|Trust Boundary Usuario–API
+|Inyección de datos maliciosos
+|Tampering
+|Manipulación de datos en frontera de confianza
+|Todos los parámetros de entrada se validan con express-validator antes de ser procesados por el sistema. +
+Parcial: validación de parámetros, sin WAF ni sanitización profunda.
+|Alta
+|===
+
+
+Una vez que se han identificado y documentado todo lo anterior, se procede a crear el modelo de amenazas con una herramienta especializada. En nuestro caso, recomendamos OWASP Threat Dragon, una herramienta de código abierto para modelado de amenazas que permite crear diagramas DFD y asociar amenazas y mitigaciones de manera visual.
+
 
 ===== Paso 4 — Evaluar el trabajo
 
