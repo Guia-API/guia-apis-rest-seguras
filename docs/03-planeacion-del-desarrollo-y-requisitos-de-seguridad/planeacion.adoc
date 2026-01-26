@@ -41,6 +41,82 @@ Las prácticas reportadas en la literatura para esta fase se presentan en la sig
 |[21]
 |===
 
+Es importante señalar que no todas las prácticas propuestas en esta sección serán necesariamente aplicables en todos los contextos de desarrollo. Por ejemplo, el análisis del inventario de APIs existentes puede no ser pertinente en organizaciones que no cuenten previamente con un ecosistema de APIs. En estos casos, dicha práctica puede omitirse o adaptarse según el contexto particular del proyecto, sin que ello comprometa la validez del proceso de planeación.
+
+Antes de continuar con la fase de elicitación y definición detallada de requisitos, se recomienda que el diseñador de la API reflexione y dé respuesta, al menos de manera preliminar, a las siguientes preguntas de verificación:
+
+* ¿A quién va dirigida la API y quiénes serán sus principales consumidores?
+* ¿Cuál es el contexto organizacional y operativo en el que se desplegará la API?
+* ¿Qué problema específico se busca resolver mediante la API?
+* ¿Qué tipo de datos manejará la API y qué tan sensibles son?
+* ¿Existen restricciones normativas o regulatorias que deban considerarse desde el diseño?
+* ¿Qué expectativas de seguridad existen por parte de la organización o de los usuarios finales?
+
+=== Estructura de Desglose del Trabajo (EDT)
+
+La Estructura de Desglose del Trabajo (EDT), o Work Breakdown Structure (WBS), es una técnica de planificación utilizada para descomponer de manera jerárquica el alcance total de un proyecto en componentes más pequeños y manejables. De acuerdo con el Project Management Body of Knowledge (PMBOK® Guide – Seventh Edition), la EDT se define como una descomposición jerárquica del trabajo total que debe realizar el equipo del proyecto para cumplir con los objetivos y generar los entregables requeridos (Project Management Institute, 2021).
+
+El propósito fundamental de la EDT es servir como una herramienta de organización que permita transformar un proyecto complejo en un conjunto estructurado de tareas y entregables, facilitando su planificación, asignación de responsabilidades, seguimiento y control. Al dividir el trabajo en partes más pequeñas, la EDT contribuye a reducir la complejidad, evitar omisiones y mejorar la comprensión global del proyecto (Phillips, s.f.).
+
+Un principio esencial de la EDT es la denominada regla del 100%, la cual establece que la suma de los elementos descompuestos debe representar el 100% del alcance del proyecto, sin duplicidades ni elementos faltantes (Project Management Institute, 2019). Esto garantiza que todo el trabajo necesario esté contemplado dentro de la estructura, evitando tanto la sobrecarga como las lagunas en la planificación.
+
+Entre los principales beneficios del uso de una EDT se encuentran: la división del trabajo en componentes manejables, la alineación de las tareas con los entregables del proyecto, la mejora en la estimación de tiempos, costos y recursos, así como la prevención de que actividades relevantes queden fuera del alcance del proyecto (Mulcahy, 2018). Asimismo, la EDT fortalece la trazabilidad entre actividades, requisitos y productos finales, lo cual resulta especialmente relevante en proyectos de software.
+
+La EDT puede adoptar distintos enfoques de descomposición, tales como orientada a productos, fases, entregables o actividades, e incluso combinaciones híbridas, dependiendo de la naturaleza del proyecto (Project Management Institute, 2019; Haugan, 2002). En proyectos de desarrollo de software y APIs web, resulta especialmente útil una EDT orientada a entregables y fases, ya que permite organizar el trabajo desde la definición de requisitos hasta el despliegue y mantenimiento del sistema.
+
+En el contexto del diseño de APIs REST seguras, la EDT cobra especial relevancia al permitir integrar de manera explícita las actividades relacionadas con la seguridad desde las primeras etapas del proyecto, asegurando que no se traten como aspectos aislados o posteriores al desarrollo funcional.
+
+
+==== Ejemplo de EDT para una API REST segura
+
+La siguiente estructura ilustra una posible EDT genérica que puede adaptarse a distintos contextos de desarrollo de APIs REST seguras:
+
+[source]
+
+Planeación del proyecto de API REST
+1.1 Definición de alcance y objetivos
+1.2 Identificación de actores y partes interesadas
+1.3 Análisis del contexto organizacional
+Ingeniería de requisitos
+2.1 Elicitación de requisitos funcionales
+2.2 Elicitación de requisitos de seguridad
+2.3 Priorización y validación de requisitos
+2.4 Elaboración de la ERS
+2.5 Trazabilidad de requisitos
+Diseño de la API
+3.1 Definición de arquitectura
+3.2 Modelado de recursos REST
+3.3 Definición de contratos (endpoints, métodos, formatos)
+3.4 Diseño de mecanismos de autenticación y autorización
+3.5 Modelado de amenazas
+3.6 Diseño de controles de seguridad
+Implementación
+4.1 Desarrollo de endpoints
+4.2 Implementación de validación de entradas
+4.3 Implementación de control de acceso
+4.4 Implementación de manejo de errores
+4.5 Implementación de mecanismos criptográficos y tokens
+4.6 Configuración de rate limiting
+Pruebas y verificación
+5.1 Pruebas funcionales
+5.2 Pruebas de seguridad básicas
+5.3 Validación contra requisitos
+5.4 Documentación de resultados
+Despliegue y operación
+6.1 Configuración de entornos
+6.2 Despliegue seguro
+6.3 Configuración de monitoreo y registros
+6.4 Gestión de versiones y actualizaciones
+Documentación y mantenimiento
+7.1 Documentación técnica de la API
+7.2 Manuales de uso y consumo
+7.3 Actualización de artefactos de diseño
+7.4 Gestión de cambios
+
+A continuación, se presenta una EDT en formato gráfico correspondiente a la fase de implementación, en la cual se ha descompuesto la API del ejemplo en distintos módulos funcionales. Esta descomposición permite estructurar el desarrollo del sistema de manera organizada, facilitando la planificación del orden de implementación, así como la asignación y distribución de tareas entre los integrantes del equipo. De este modo, la EDT no solo apoya la gestión del proyecto, sino que también contribuye a una construcción progresiva y controlada de la API REST.
+
+image::edt-grafico.png[Estructura de Desglose del Trabajo (EDT) para la fase de implementación de una API REST segura]
+
 === Elicitación y definición de requisitos
 
 La elicitación de requisitos es el proceso mediante el cual se identifican las necesidades y restricciones de los distintos actores involucrados en un sistema de software. Este proceso implica descubrir lo que el cliente necesita y desea mediante enfoques bien definidos. Se trata de una actividad activa orientada a extraer los requisitos desde las partes interesadas, lo que puede implicar la formulación de preguntas y la aplicación de escucha activa. [22]
@@ -95,6 +171,23 @@ A continuación, se presentan ejemplos de requisitos funcionales y su correspond
 
 La documentación de requisitos constituye un componente esencial del desarrollo de software, ya que describe de manera detallada lo que el sistema planificado deberá hacer y el modo en que se espera que funcione. Su propósito es servir como una referencia integral para todas las etapas del ciclo de vida del software. Esta documentación puede presentarse en forma de un documento de Especificación de Requisitos de Software (Software Requirements Specification, SRS).
 
+===== Documento de visión y alcance
+
+Antes de elaborar una Especificación de Requisitos de Software (SRS), es recomendable definir claramente la visión del producto y el alcance del proyecto, ya que ambos constituyen elementos fundamentales de los requisitos de negocio.
+
+De acuerdo con Wiegers, la visión del producto describe de manera concisa el producto final que permitirá alcanzar los objetivos del negocio. Esta visión no solo indica qué es el producto, sino también en qué puede llegar a convertirse, proporcionando un marco de referencia para la toma de decisiones a lo largo de su ciclo de vida y alineando a todos los interesados en una misma dirección [23].
+
+Por su parte, el alcance del proyecto delimita qué parte de esa visión será abordada por el proyecto o por una iteración específica de desarrollo. En otras palabras, establece explícitamente qué está dentro y qué queda fuera del proyecto actual, evitando ambigüedades y expectativas irreales [23].
+
+Wiegers señala que tanto la visión como el alcance suelen integrarse en un documento de visión y alcance, el cual reúne los requisitos de negocio en un único entregable que sirve como base para el trabajo de desarrollo posterior. Este documento suele ser responsabilidad del patrocinador del proyecto o de la autoridad financiadora, y puede ser elaborado con apoyo de un analista de negocios, a partir de la información proporcionada por actores clave como gerentes, expertos del dominio o responsables de producto [23].
+
+A diferencia del SRS, el documento de visión y alcance define el alcance a un nivel alto de abstracción. Los detalles funcionales y técnicos se refinan posteriormente en la especificación de requisitos. En proyectos grandes se recomienda contar tanto con un documento completo de visión y alcance como con un SRS, mientras que en proyectos evolutivos o iterativos el alcance puede definirse directamente dentro de la documentación de requisitos de cada versión [23].
+
+De este modo, el documento de visión y alcance complementa al SRS, ya que asegura que los requisitos detallados se desarrollen dentro de un marco estratégico claro y compartido, reduciendo riesgos de desviaciones y reprocesos.
+
+Como parte del estudio de caso desarrollado en este trabajo, se elaboró un documento de visión y alcance aplicado al sistema clínico. Dicho documento se pone a disposición como ejemplo práctico para el lector y puede consultarse en el siguiente enlace:
+https://github.com/Guia-API/HealREST-docs/blob/main/Vision-Alcance_Guia-APIs-REST.pdf
+
 ===== Especificación de requisitos de software
 
 La especificación de Requisitos de Software también puede denominarse especificación funcional, especificación del producto, documento de requisitos o especificación del sistema, aunque estos términos no siempre se emplean de manera uniforme en todas las organizaciones [22].
@@ -123,7 +216,8 @@ Trabajar a partir de un conjunto de requisitos acordado reduce la posibilidad de
 
 ====
 
-//TODO: Incluir enlace a ejemplo de SRS de nuestro caso de estudio
+Como parte del estudio de caso desarrollado en este trabajo, se elaboró una Especificación de Requisitos de Software (ERS) correspondiente al sistema clínico utilizado como caso de estudio. Este documento se pone a disposición como ejemplo práctico para el lector, con el objetivo de ilustrar la aplicación de los principios descritos en esta sección, y puede consultarse en el siguiente enlace:
+https://github.com/Guia-API/HealREST-docs/blob/main/ERS_Gu%C3%ADa-API-REST.pdf
 
 ==== Validación y trazabilidad de requisitos
 
@@ -180,7 +274,9 @@ Los atributos asociados a cada requisito pueden registrarse dentro de la matriz 
 
 Adicionalmente, pueden incluirse atributos que contribuyan a verificar la satisfacción de las partes interesadas, tales como los criterios de estabilidad, complejidad y aceptación.
 
-//TODO: Incluir ejemplo de matriz de trazabilidad
+A continuación, se presenta un ejemplo simplificado de una matriz de trazabilidad de requisitos:
+
+image::matriz-trazabilidad-req-ejemplo.png[Ejemplo de matriz de trazabilidad de requisitos]
 
 === Evaluación organizacional y su relación con la seguridad
 
@@ -204,21 +300,6 @@ Un enfoque complementario es la estrategia de seguridad confianza cero (Zero Tru
 
 Estas prácticas organizacionales y modelos, como _Zero Trust_, resultan especialmente relevantes en el diseño y operación de APIs REST, dado que la exposición directa a internet incrementa la superficie de ataque y exige la alineación entre los aspectos técnicos y humanos dentro de una misma estrategia de seguridad.
 
-=== Identificación de amenazas y riesgos
-
-La identificación de amenazas y riesgos constituye una etapa crítica en el desarrollo seguro de APIs. Una amenaza se define como un evento o conjunto de circunstancias que puede comprometer los objetivos de seguridad de la API. Por ejemplo, un atacante que obtiene nombres y direcciones de la base de datos de clientes representa una amenaza para la confidencialidad de la información [3].
-
-Las APIs se enfrentan a una amplia variedad de amenazas de seguridad, que incluyen ataques deliberados y fugas de datos involuntarias. Los usuarios no autorizados pueden explotar vulnerabilidades para acceder a datos confidenciales, interrumpir servicios o secuestrar sistemas. 
-
-Entre las amenazas más frecuentes se encuentran los ataques de inyección, los ataques de tipo «hombre en medio» (man-in-the-middle, MITM) y los ataques de denegación de servicio distribuido (DDoS), diseñados para sobrecargar una API con tráfico malicioso [28]. Aunque el tipo y la frecuencia de las amenazas pueden variar según el modelo de API, los ataques más comunes deben considerarse para cualquier API que se diseñe o utilice [29].
-
-La identificación de amenazas implica determinar los riesgos potenciales mediante herramientas y estrategias como listas de verificación, trazabilidad, análisis de puntos de entrada y evaluación de vulnerabilidades [30]. Este proceso permite relacionar los componentes del sistema con los elementos de la amenaza para su posterior validación y verificación.
-
-Además de la identificación, la búsqueda activa de amenazas, conocida como  búsqueda de amenazas (threat hunting), consiste en la detección proactiva de amenazas desconocidas o previamente no detectadas dentro de la red de una organización. A diferencia del monitoreo de seguridad tradicional, que se enfoca en la detección y respuesta a amenazas conocidas mediante herramientas automatizadas, la búsqueda de amenazas persigue anticiparse a riesgos emergentes, permitiendo mitigarlos antes de que puedan generar daños significativos [28].
-
-Por lo tanto, la labor del diseñador de una API no se limita a garantizar el cumplimiento de sus funciones requeridas, sino que también incluye una vigilancia constante del panorama de seguridad, con el objetivo de prevenir y mitigar posibles amenazas que puedan comprometer la integridad del sistema.
-
-En secciones posteriores se describen metodologías específicas para el modelado de amenazas, las cuales facilitan la identificación y análisis sistemático de riesgos en el contexto del desarrollo de APIs REST seguras.
 
 === Referencias normativas y técnicas de seguridad para API
 
@@ -607,6 +688,22 @@ Al desarrollar o integrar APIs que manejen información médica o datos sensible
 La HIPAA es especialmente relevante en APIs del sector salud o aquellas que gestionen información personal sensible.  
 Aunque su aplicación es obligatoria solo en Estados Unidos, sus principios pueden servir como guía de buenas prácticas internacionales.
 ====
+
+=== Identificación de amenazas y riesgos
+
+La identificación de amenazas y riesgos constituye una etapa crítica en el desarrollo seguro de APIs. Una amenaza se define como un evento o conjunto de circunstancias que puede comprometer los objetivos de seguridad de la API. Por ejemplo, un atacante que obtiene nombres y direcciones de la base de datos de clientes representa una amenaza para la confidencialidad de la información [3].
+
+Las APIs se enfrentan a una amplia variedad de amenazas de seguridad, que incluyen ataques deliberados y fugas de datos involuntarias. Los usuarios no autorizados pueden explotar vulnerabilidades para acceder a datos confidenciales, interrumpir servicios o secuestrar sistemas. 
+
+Entre las amenazas más frecuentes se encuentran los ataques de inyección, los ataques de tipo «hombre en medio» (man-in-the-middle, MITM) y los ataques de denegación de servicio distribuido (DDoS), diseñados para sobrecargar una API con tráfico malicioso [28]. Aunque el tipo y la frecuencia de las amenazas pueden variar según el modelo de API, los ataques más comunes deben considerarse para cualquier API que se diseñe o utilice [29].
+
+La identificación de amenazas implica determinar los riesgos potenciales mediante herramientas y estrategias como listas de verificación, trazabilidad, análisis de puntos de entrada y evaluación de vulnerabilidades [30]. Este proceso permite relacionar los componentes del sistema con los elementos de la amenaza para su posterior validación y verificación.
+
+Además de la identificación, la búsqueda activa de amenazas, conocida como  búsqueda de amenazas (threat hunting), consiste en la detección proactiva de amenazas desconocidas o previamente no detectadas dentro de la red de una organización. A diferencia del monitoreo de seguridad tradicional, que se enfoca en la detección y respuesta a amenazas conocidas mediante herramientas automatizadas, la búsqueda de amenazas persigue anticiparse a riesgos emergentes, permitiendo mitigarlos antes de que puedan generar daños significativos [28].
+
+Por lo tanto, la labor del diseñador de una API no se limita a garantizar el cumplimiento de sus funciones requeridas, sino que también incluye una vigilancia constante del panorama de seguridad, con el objetivo de prevenir y mitigar posibles amenazas que puedan comprometer la integridad del sistema.
+
+En la siguiente sección se describen metodologías específicas para el modelado de amenazas, las cuales facilitan la identificación y análisis sistemático de riesgos en el contexto del desarrollo de APIs REST seguras.
 
 === Modelado de amenazas
 
@@ -1060,6 +1157,46 @@ image::dfd_heal_rest.png[Diagrama de Flujo de Datos para la API REST del sistema
 A partir de la descomposición realizada en el paso anterior, se identifican y analizan las amenazas aplicando las categorías de STRIDE sobre los componentes más relevantes del sistema.
 
 Aunque en este caso se utiliza STRIDE, se puede optar por cualquier otra taxonomía de amenazas que se considere adecuada.
+
+Para facilitar la aplicación del modelo STRIDE en el proceso de identificación de amenazas, a continuación se presenta una tabla que resume cada una de sus categorías, su descripción, la propiedad de seguridad asociada y su propósito dentro del diseño seguro. Esta tabla puede utilizarse como referencia durante el análisis, permitiendo al diseñador evaluar de manera sistemática los posibles riesgos que afectan a cada componente.
+
+
+[cols="1,2,1,2", options="header"]
+|===
+|Tipo de amenaza (STRIDE) |Descripción |Propiedad de seguridad |Explicación
+
+|Spoofing
+|Acción maliciosa orientada a suplantar la identidad de un usuario o sistema, por ejemplo mediante el uso indebido de credenciales.
+|Autenticación
+|La autenticación adecuada permite verificar la identidad de los actores y prevenir accesos no legítimos.
+
+|Tampering
+|Modificación maliciosa de datos persistentes o en tránsito, incluyendo creación, alteración o eliminación no autorizada de información.
+|Integridad
+|La integridad garantiza que los datos no sean alterados de forma no autorizada y se mantengan correctos y confiables.
+
+|Repudiation
+|Realización de acciones sin posibilidad de ser rastreadas o verificadas posteriormente por falta de registros adecuados.
+|No repudio
+|El no repudio permite demostrar que una acción fue realizada por un actor específico, evitando que niegue su responsabilidad.
+
+|Information Disclosure
+|Acceso o exposición no autorizada de información confidencial, ya sea almacenada o en tránsito.
+|Confidencialidad
+|La confidencialidad asegura que solo los actores autorizados puedan acceder a información sensible.
+
+|Denial of Service (DoS)
+|Intento de degradar o impedir la disponibilidad de un servicio mediante sobrecarga o bloqueo de recursos.
+|Disponibilidad
+|La disponibilidad garantiza que los servicios estén accesibles y operativos cuando los usuarios legítimos los requieren.
+
+|Elevation of Privilege
+|Obtención de permisos superiores a los autorizados, permitiendo ejecutar acciones no previstas.
+|Autorización
+|La autorización controla los privilegios de acceso de los actores según su rol o nivel de permisos.
+|===
+
+
 
 ====== Análisis de amenazas
 
