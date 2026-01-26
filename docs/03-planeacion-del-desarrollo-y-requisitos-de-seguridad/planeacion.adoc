@@ -1158,6 +1158,46 @@ A partir de la descomposición realizada en el paso anterior, se identifican y a
 
 Aunque en este caso se utiliza STRIDE, se puede optar por cualquier otra taxonomía de amenazas que se considere adecuada.
 
+Para facilitar la aplicación del modelo STRIDE en el proceso de identificación de amenazas, a continuación se presenta una tabla que resume cada una de sus categorías, su descripción, la propiedad de seguridad asociada y su propósito dentro del diseño seguro. Esta tabla puede utilizarse como referencia durante el análisis, permitiendo al diseñador evaluar de manera sistemática los posibles riesgos que afectan a cada componente.
+
+
+[cols="1,2,1,2", options="header"]
+|===
+|Tipo de amenaza (STRIDE) |Descripción |Propiedad de seguridad |Explicación
+
+|Spoofing
+|Acción maliciosa orientada a suplantar la identidad de un usuario o sistema, por ejemplo mediante el uso indebido de credenciales.
+|Autenticación
+|La autenticación adecuada permite verificar la identidad de los actores y prevenir accesos no legítimos.
+
+|Tampering
+|Modificación maliciosa de datos persistentes o en tránsito, incluyendo creación, alteración o eliminación no autorizada de información.
+|Integridad
+|La integridad garantiza que los datos no sean alterados de forma no autorizada y se mantengan correctos y confiables.
+
+|Repudiation
+|Realización de acciones sin posibilidad de ser rastreadas o verificadas posteriormente por falta de registros adecuados.
+|No repudio
+|El no repudio permite demostrar que una acción fue realizada por un actor específico, evitando que niegue su responsabilidad.
+
+|Information Disclosure
+|Acceso o exposición no autorizada de información confidencial, ya sea almacenada o en tránsito.
+|Confidencialidad
+|La confidencialidad asegura que solo los actores autorizados puedan acceder a información sensible.
+
+|Denial of Service (DoS)
+|Intento de degradar o impedir la disponibilidad de un servicio mediante sobrecarga o bloqueo de recursos.
+|Disponibilidad
+|La disponibilidad garantiza que los servicios estén accesibles y operativos cuando los usuarios legítimos los requieren.
+
+|Elevation of Privilege
+|Obtención de permisos superiores a los autorizados, permitiendo ejecutar acciones no previstas.
+|Autorización
+|La autorización controla los privilegios de acceso de los actores según su rol o nivel de permisos.
+|===
+
+
+
 ====== Análisis de amenazas
 
 El análisis de amenazas consiste en la identificación de amenazas para la aplicación, e implica examinar cada aspecto de la funcionalidad, arquitectura y diseño de la misma. Es importante identificar y clasificar posibles debilidades que podrían ser explotadas.
