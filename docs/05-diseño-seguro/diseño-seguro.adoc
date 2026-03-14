@@ -735,7 +735,3 @@ ref: Microservices for the Enterprise, Kasun Indrasiri, Prabath Siriwardena. Apr
 Los casos de uso constituyen un elemento esencial en el diseño de software, ya que describen las interacciones que los usuarios legítimos realizan con el sistema para alcanzar objetivos específicos. Permiten comprender los flujos funcionales esperados, delimitando las acciones válidas dentro del contexto de operación normal del sistema.
 
 De manera complementaria, los casos de abuso (abuse cases) describen cómo un sistema podría ser utilizado de forma indebida o maliciosa. Su propósito principal es identificar y analizar posibles amenazas a la seguridad mediante la exploración de escenarios en los que un atacante podría explotar comportamientos o debilidades del sistema. Este enfoque requiere adoptar la perspectiva de un adversario para anticipar acciones potencialmente dañinas y evaluar su impacto en la confidencialidad, integridad o disponibilidad del sistema.
-
-A continuación se presentan ejemplos de casos de uso y casos de abuso diseñados en torno al API empleado como ejemplo a lo largo de este documento.
-
-//TODO: Incluir ejemplos de casos de uso y casos de abuso relacionados con el API del ejemplo.
